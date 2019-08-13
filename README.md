@@ -130,19 +130,6 @@ o Purchase.buy()
 
 # Models
 
-**User model**
-{ username - String // required & unique  
- email - String // required & unique  
- password - String // required & unique  
- phone – Number // required & unique  
- img – String // required
-registrationDate – String //timestamp
-myItems - [item._id]
-myPurchase – [purchase._id]
-}
-
-**Item models**
-
 <pre>
 User model
 
