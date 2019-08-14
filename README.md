@@ -1,10 +1,10 @@
-## Second-hand
+# Second-hand
 
-# Description
+## Description
 
 This is an app to buy and sale vinatage clothes and accessories. You can update your wardrobe and get rid of boring things!
 
-# User Stories
+## User Stories
 
 • 404: As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
 
@@ -28,7 +28,7 @@ This is an app to buy and sale vinatage clothes and accessories. You can update 
 
 • Connect with owner: As a user I want to have connection with owner to buy stuff.
 
-# Backlog
+## Backlog
 
 **User profile:**
 
@@ -101,7 +101,7 @@ This is an app to buy and sale vinatage clothes and accessories. You can update 
 
 • Navbar
 
-# Services
+## Services
 
 **Auth Service**
 o auth.login(user)
@@ -128,7 +128,7 @@ o Purchase.buy()
 
 # Server / Backend
 
-# Models
+## Models
 
 <pre>
 User model
@@ -136,8 +136,8 @@ User model
 {   username - String // required & unique     
 ​    email - String // required & unique   
 ​    password - String // required & unique  
-​    phone – Number // required & unique  
-​    img – String // required
+​    phone – Number // unique  
+​    img – String 
 ​    registrationDate – String  //timestamp
 ​    myItems - [item._id] 
 ​    myPurchase – [purchase._id]
@@ -151,7 +151,7 @@ Item model
       year: Number 
 ​      price: Number
 ​      category:['clothing', 'shoes', 'accessories']
-     isBought:false  
+      isBought:false  
   }
 
 Purschase model
@@ -164,7 +164,7 @@ Purschase model
 }
 </pre>
 
-# API Endpoints (backend routes)
+## API Endpoints (backend routes)
 
 
 | **HTTP Method** | **URL**              | **Request Body**                                         | **Success status** | **Error Status** | **Description**                                                                                                                   |
@@ -185,15 +185,19 @@ Purschase model
 | POST            | /purchase/:id/buy    | {phone, email }                                          | 201                | 400              | `Show message`                                                                                                                    |
 
 
-# Links
+## Links
+<pre> 
+Trello/Kanban
 
-**Trello/Kanban**
 https://trello.com/b/IrKEwO41/second-hand 
-**Git***
+
+Git
+
 BACK-END
 FRONT-END
+</pre>
 
-# Slides
+## Slides
 
 The url to your presentation slides
 Slides Link

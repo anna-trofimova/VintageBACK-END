@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+
 const userSchema = new Schema({
   username: {
     type: String,
@@ -9,8 +11,28 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
+  email:{
+    type: String,
+  },
+  phone:{
+    type: Number,
+  },
+  registrationDate:{
+    type: String
+
+  },
+  myItems:{
+    type: [],
+  },
+  myPurchase:{
+    type:[{}]
+  },
+  img:{
+    type:String
+  }
+
 }, {
   timestamps: {
     createdAt: 'created_at',
