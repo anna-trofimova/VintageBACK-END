@@ -6,7 +6,8 @@ const router = express.Router();
 const User = require('../models/User');
 
 router.get('/', async (req, res, next) => {
-  const id = req.session.currentUser._id
+  if (req.session.currentUser) {
+    const id = req.session.currentUser._id
     try {
      const showUser =  await User.findById(id)
      return res.status(200).json(showUser);
@@ -14,6 +15,9 @@ router.get('/', async (req, res, next) => {
     catch(error) {
     next(error);
    } 
+  } else {
+    res.status(404).json({message: 'user not logged in'})
+  }
 });
 
 router.put('/:id/edit', async (req, res, next) => {
