@@ -1,18 +1,16 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-
 const itemSchema = new Schema({
   name: {
     type: String,
     required: true
   },
-  img:String,
-  description:String,
+  img: String,
+  description: String,
   year: Number,
-​  price: Number, 
-​  category:['clothing', 'shoes', 'accessories'],
+  price: Number,
+  category: ['clothing', 'shoes', 'accessories'],
   isBought: {
     type: Boolean,
     default: false
