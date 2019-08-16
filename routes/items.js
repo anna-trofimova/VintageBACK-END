@@ -7,7 +7,7 @@ const Item = require('../models/Items');
 router.get('/', async (req, res, next) => {
   try {
     const listOfItems = await Item.find();
-    return res.status(200).json({ listOfItems });
+    return res.status(200).json(listOfItems);
   } catch (error) {
     next(error);
   }
