@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
 
 const userSchema = new Schema({
   username: {
@@ -21,12 +22,14 @@ const userSchema = new Schema({
     type: String
 
   },
-  myItems: {
-    type: []
-  },
-  myPurchase: {
-    type: [{}]
-  },
+  myItems: [{
+    type: ObjectId,
+    ref: 'Item'
+  }],
+  myPurchase: [{
+    type: ObjectId,
+    ref: 'Item'
+  }],
   img: {
     type: String
   }

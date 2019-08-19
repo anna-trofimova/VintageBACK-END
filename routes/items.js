@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const Item = require('../models/Items');
+const User = require('../models/User');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -13,10 +14,22 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/:id/details', async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const itemDetails = await Item.findById(id);
+    return res.status(200).json(itemDetails);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post('/create', async (req, res, next) => {
   try {
     const newItem = req.body;
     const createItem = await Item.create(newItem);
+    const itemId = createItem._id;
+    await User.findOneAndUpdate({ $push: { myItems: itemId } });
     return res.status(200).json(createItem);
   } catch (error) {
     next(error);

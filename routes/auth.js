@@ -29,7 +29,7 @@ router.post(
       if (!user) {
         next(createError(404));
       } else if (bcrypt.compareSync(password, user.password)) {
-        console.log(user)
+        console.log(user);
         req.session.currentUser = user;
         return res.status(200).json(user);
       } else {
