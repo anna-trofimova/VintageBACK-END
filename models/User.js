@@ -28,7 +28,7 @@ const userSchema = new Schema({
   }],
   myPurchase: [{
     type: ObjectId,
-    ref: 'Item'
+    ref: 'Purchase'
   }],
   img: {
     type: String
