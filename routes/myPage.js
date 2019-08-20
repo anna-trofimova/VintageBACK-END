@@ -21,14 +21,14 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:id/edit', async (req, res, next) => {
   const { id } = req.params;
-  const { username, email, phone, img } = req.body;
+  const { username, email, phone, imageUrl } = req.body;
 
   try {
     const updated = await User.findByIdAndUpdate(id, {
       username,
       email,
       phone,
-      img
+      imageUrl
     }, { new: true });
     return res.status(200).json(updated);
   } catch (error) {

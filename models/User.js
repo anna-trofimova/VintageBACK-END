@@ -30,9 +30,9 @@ const userSchema = new Schema({
     type: ObjectId,
     ref: 'Purchase'
   }],
-  img: {
+  imageUrl: [{
     type: String
-  }
+  }]
 
 }, {
   timestamps: {

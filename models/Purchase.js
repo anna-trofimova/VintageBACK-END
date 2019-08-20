@@ -7,11 +7,7 @@ const purchaseSchema = new Schema({
     type: ObjectId,
     ref: 'User'
   }],
-  userId: [{
-    type: ObjectId,
-    ref: 'User'
-  }],
-  ItemId: [{
+  itemId: [{
     type: ObjectId,
     ref: 'Item'
   }]
