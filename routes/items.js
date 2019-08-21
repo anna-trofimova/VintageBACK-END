@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../models/Items');
 const User = require('../models/User');
+const Purchase = require('../models/Purchase');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -61,11 +62,17 @@ router.put('/:id/edit', async (req, res, next) => {
   }
 });
 
-router.delete('/:id/delete', async (req, res, next) => {
+router.post('/:id/delete', async (req, res, next) => {
   const { id } = req.params;
+  const { idUser } = req.body;
   try {
     await Item.findByIdAndDelete(id);
-    return res.status(200).json({ message: 'item is deleted' });
+    const userItems = await User.findByIdAndUpdate(idUser, { $pull: { myItems: id } }, { new: true });
+    const purchases = await Purchase.find({ itemId: id });
+    for (let i = 0; i < purchases.length; i++) {
+      await User.updateMany({ myPurchase: purchases[i]._id }, { $pull: { myPurchase: purchases[i]._id } });
+    }
+    return res.status(200).json(userItems);
   } catch (error) {
     next(error);
   }

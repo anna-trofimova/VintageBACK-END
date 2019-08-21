@@ -7,6 +7,10 @@ const purchaseSchema = new Schema({
     type: ObjectId,
     ref: 'User'
   },
+  userId: {
+    type: ObjectId,
+    ref: 'User'
+  },
   itemId: {
     type: ObjectId,
     ref: 'Item'

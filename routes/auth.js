@@ -23,7 +23,7 @@ router.get('/me', isLoggedIn(), async (req, res, next) => {
     { path: 'myPurchase',
       populate: {
         path: 'ownerId'
-      } });
+      } }).populate('myItems');
   console.log(user);
   res.json(user);
 });

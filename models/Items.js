@@ -6,7 +6,9 @@ const itemSchema = new Schema({
     type: String,
     required: true
   },
-  img: String,
+  img: [{
+    type: String
+  }],
   description: String,
   year: Number,
   price: Number,
