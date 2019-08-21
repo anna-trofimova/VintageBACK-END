@@ -14,6 +14,16 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/myItems', async (req, res, next) => {
+  const userId = req.session.currentUser._id;
+  try {
+    const myItems = await Item.find(userId);
+    return res.status(200).json(myItems);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:id/details', async (req, res, next) => {
   const { id } = req.params;
   try {
@@ -29,7 +39,9 @@ router.post('/create', async (req, res, next) => {
     const newItem = req.body;
     const createItem = await Item.create(newItem);
     const itemId = createItem._id;
-    await User.findOneAndUpdate({ $push: { myItems: itemId } });
+    const userId = req.session.currentUser._id;
+    const user = await User.findByIdAndUpdate(userId, { $push: { myItems: itemId } });
+    req.session.currentUser = user;
     return res.status(200).json(createItem);
   } catch (error) {
     next(error);

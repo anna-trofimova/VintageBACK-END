@@ -14,8 +14,18 @@ const {
   validationLoggin
 } = require('../helpers/middlewares');
 
-router.get('/me', isLoggedIn(), (req, res, next) => {
-  res.json(req.session.currentUser);
+router.get('/me', isLoggedIn(), async (req, res, next) => {
+  const user = await User.findById(req.session.currentUser._id).populate('myPurchase').populate(
+    { path: 'myPurchase',
+      populate: {
+        path: 'itemId'
+      } }).populate(
+    { path: 'myPurchase',
+      populate: {
+        path: 'ownerId'
+      } });
+  console.log(user);
+  res.json(user);
 });
 
 router.post(
@@ -25,7 +35,15 @@ router.post(
   async (req, res, next) => {
     const { username, password } = req.body;
     try {
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ username }).populate(
+        { path: 'myPurchase',
+          populate: {
+            path: 'itemId'
+          } }).populate(
+        { path: 'myPurchase',
+          populate: {
+            path: 'ownerId'
+          } });
       if (!user) {
         next(createError(404));
       } else if (bcrypt.compareSync(password, user.password)) {

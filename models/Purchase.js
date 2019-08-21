@@ -3,14 +3,14 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const purchaseSchema = new Schema({
-  ownerId: [{
+  ownerId: {
     type: ObjectId,
     ref: 'User'
-  }],
-  itemId: [{
+  },
+  itemId: {
     type: ObjectId,
     ref: 'Item'
-  }]
+  }
 });
 
 const Purchase = mongoose.model('Purchase', purchaseSchema);

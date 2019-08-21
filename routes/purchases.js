@@ -20,12 +20,13 @@ router.post('/:id/buy', async (req, res, next) => {
   try {
     const itemFound = await Item.findByIdAndUpdate(itemId, { isBought: true });
     const owner = await User.findOne({ myItems: itemFound._id });
-    await User.findOneAndUpdate(currentUserId, { $push: { myPurchase: itemId } });
     const createdPurchase = await Purchase.create({
       ownerId: owner._id,
       userId: currentUserId,
       itemId: itemId
     });
+    const user = await User.findOneAndUpdate(currentUserId, { $push: { myPurchase: createdPurchase._id } }, { new: true });
+    req.session.currentUser = user;
     return res.status(200).json({ createdPurchase, itemFound, owner });
   } catch (error) {
     next(error);
